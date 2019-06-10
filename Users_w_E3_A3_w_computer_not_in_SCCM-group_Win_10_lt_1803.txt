@@ -17,4 +17,10 @@ Where A.AssetID Not In (Select ADC.AssetID
           ADM.ChildAdObjectID = ADG.ADObjectID Or
           ADM.ParentAdObjectID = ADG.ADObjectID
       Where ADG.Name = 'SCCM-Office365-ProPlus-prod') And A.Version < '1803' And
-  A.Username Is Not Null And AC.State = 1
+  A.Username In (Select ADU.Username
+      From tblADusers As ADU Inner Join tblADMembership As ADM On
+          ADU.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
+          ADM.ChildAdObjectID = ADG.ADObjectID Or
+          ADM.ParentAdObjectID = ADG.ADObjectID
+      Where (ADG.Name = 'E3-kommun' Or ADG.Name = 'E3-bolag' Or
+          ADG.Name = 'A3-skola')) And A.Username Is Not Null And AC.State = 1
