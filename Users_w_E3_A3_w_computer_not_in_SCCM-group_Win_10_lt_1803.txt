@@ -1,0 +1,13 @@
+Select Top 1000000 A.AssetID,
+  A.AssetName,
+  AT.AssetTypename,
+  AT.AssetTypeIcon10 As icon,
+  A.IPAddress,
+  A.Lastseen,
+  A.Lasttried,
+  A.Version,
+  A.Username
+From tblAssets As A
+  Inner Join tblAssetCustom As AC On A.AssetID = AC.AssetID
+  Inner Join tsysAssetTypes As AT On AT.AssetType = A.Assettype
+Where A.Version < '1803' And A.Username Is Not Null And AC.State = 1
