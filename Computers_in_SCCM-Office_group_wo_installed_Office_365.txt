@@ -1,0 +1,20 @@
+Select Top 1000000 tblAssets.AssetID,
+  tblAssets.AssetName,
+  tsysAssetTypes.AssetTypename,
+  tsysAssetTypes.AssetTypeIcon10 As icon,
+  tblAssets.Lastseen,
+  tblAssets.Username
+From tblAssets
+  Inner Join tblAssetCustom On tblAssets.AssetID = tblAssetCustom.AssetID
+  Inner Join tsysAssetTypes On tsysAssetTypes.AssetType = tblAssets.Assettype
+Where tblAssets.AssetID Not In (Select Top 10000 SW.AssetID
+      From tblSoftware As SW Inner Join tblSoftwareUni As SWU On
+          SW.softID = SWU.SoftID
+      Where SWU.softwareName Like 'Microsoft Office 365 ProPlus - sv-se') And
+  tblAssets.AssetID In (Select ADC.AssetID
+      From tblADComputers As ADC Inner Join tblADMembership As ADM On
+          ADC.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
+          ADM.ChildAdObjectID = ADG.ADObjectID Or
+          ADM.ParentAdObjectID = ADG.ADObjectID
+      Where ADG.Name = 'SCCM-Office365-ProPlus-prod') And tblAssetCustom.State =
+  1
