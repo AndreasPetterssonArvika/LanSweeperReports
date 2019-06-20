@@ -1,4 +1,4 @@
-Select Top 1000000 A.AssetID,
+Select Distinct Top 1000000 A.AssetID,
   A.AssetName,
   AT.AssetTypename,
   AT.AssetTypeIcon10 As icon,
@@ -15,8 +15,9 @@ Where A.AssetID Not In (Select ADC.AssetID
           ADC.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
           ADM.ChildAdObjectID = ADG.ADObjectID Or
           ADM.ParentAdObjectID = ADG.ADObjectID
-      Where ADG.Name = 'SCCM-Office365-ProPlus-prod') And A.Version >= '1809'
-  And A.Username In (Select ADU.Username
+      Where (ADG.Name = 'SCCM-Office365-ProPlus-prod' Or
+          ADG.Name = 'GemensamDatorEjO365')) And A.Version >= '1809' And
+  A.Username In (Select ADU.Username
       From tblADusers As ADU Inner Join tblADMembership As ADM On
           ADU.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
           ADM.ChildAdObjectID = ADG.ADObjectID Or
