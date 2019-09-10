@@ -4,11 +4,15 @@ Select Top 1000000 A.AssetID,
   AT.AssetTypeIcon10 As icon,
   A.Lastseen,
   A.Version,
-  A.Username
+  A.Username As sAMAccountName,
+  ADU.email As mail,
+  ADU.Firstname As givenName,
+  ADU.Lastname As SN
 From tblAssets As A
   Inner Join tblAssetCustom As AC On A.AssetID = AC.AssetID
   Inner Join tsysAssetTypes As AT On AT.AssetType = A.Assettype
   Inner Join tblADComputers On A.AssetID = tblADComputers.AssetID
+  Inner Join tblADusers As ADU On A.Username = ADU.Username
 Where A.AssetID Not In (Select ADC.AssetID
       From tblADComputers As ADC Inner Join tblADMembership As ADM On
           ADC.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
