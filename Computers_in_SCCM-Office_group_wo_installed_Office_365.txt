@@ -3,10 +3,14 @@ Select Top 1000000 tblAssets.AssetID,
   tsysAssetTypes.AssetTypename,
   tsysAssetTypes.AssetTypeIcon10 As icon,
   tblAssets.Lastseen,
-  tblAssets.Username
+  tblAssets.Username As sAMAccountName,
+  tblADusers.email As mail,
+  tblADusers.Firstname As givenName,
+  tblADusers.Lastname As SN
 From tblAssets
   Inner Join tblAssetCustom On tblAssets.AssetID = tblAssetCustom.AssetID
   Inner Join tsysAssetTypes On tsysAssetTypes.AssetType = tblAssets.Assettype
+  Inner Join tblADusers On tblAssets.Username = tblADusers.Username
 Where tblAssets.AssetID Not In (Select Top 10000 SW.AssetID
       From tblSoftware As SW Inner Join tblSoftwareUni As SWU On
           SW.softID = SWU.SoftID
