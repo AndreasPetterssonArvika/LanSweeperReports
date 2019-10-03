@@ -7,7 +7,8 @@ Select Top 1000000 A.AssetID,
   A.Username As sAMAccountName,
   ADU.email As mail,
   ADU.Firstname As givenName,
-  ADU.Lastname As SN
+  ADU.Lastname As SN,
+  A.Description
 From tblAssets As A
   Inner Join tblAssetCustom As AC On A.AssetID = AC.AssetID
   Inner Join tsysAssetTypes As AT On AT.AssetType = A.Assettype
