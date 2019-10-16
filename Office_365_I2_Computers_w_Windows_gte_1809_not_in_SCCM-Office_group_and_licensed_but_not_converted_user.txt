@@ -30,3 +30,4 @@ Where A.AssetID Not In (Select ADC.AssetID
   ADU.ADObjectID Not In (Select ADU.ADObjectID
       From tblADusers As ADU Inner Join web50repOffice365UserMailboxes
         As O365Mbox On ADU.UPN = O365Mbox.UserPrincipalName) And AC.State = 1
+  And A.Domain = 'ARVIKA' And ADU.Userdomain = 'ARVIKA'
