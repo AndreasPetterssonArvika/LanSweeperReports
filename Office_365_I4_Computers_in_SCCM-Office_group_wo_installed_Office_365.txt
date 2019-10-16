@@ -26,4 +26,5 @@ Where tblAssets.AssetID Not In (Select Top 10000 SW.AssetID
           ADC.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
           ADM.ChildAdObjectID = ADG.ADObjectID Or
           ADM.ParentAdObjectID = ADG.ADObjectID
-      Where ADG.Name = 'GemensamDatorEjO365') And tblAssetCustom.State = 1
+      Where ADG.Name = 'GemensamDatorEjO365') And tblAssetCustom.State = 1 And
+  tblAssets.Domain = 'ARVIKA' And tblADusers.Userdomain = 'ARVIKA'

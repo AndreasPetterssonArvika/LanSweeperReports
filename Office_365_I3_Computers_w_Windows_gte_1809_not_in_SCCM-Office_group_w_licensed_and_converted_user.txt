@@ -29,3 +29,4 @@ Where A.AssetID Not In (Select ADC.AssetID
           ADU.UPN = O365Mbox.UserPrincipalName
       Where (ADG.Name = 'E3-kommun' Or ADG.Name = 'E3-bolag' Or
           ADG.Name = 'A3-skola')) And A.Username Is Not Null And AC.State = 1
+  And A.Domain = 'ARVIKA' And ADU.Userdomain = 'ARVIKA'
