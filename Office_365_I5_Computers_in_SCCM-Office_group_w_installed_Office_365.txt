@@ -14,7 +14,8 @@ From tblAssets
 Where tblAssets.AssetID In (Select Top 10000 SW.AssetID
       From tblSoftware As SW Inner Join tblSoftwareUni As SWU On
           SW.softID = SWU.SoftID
-      Where SWU.softwareName Like 'Microsoft Office 365 ProPlus - sv-se') And
+      Where (SWU.softwareName Like 'Microsoft Office 365 ProPlus - sv-se' Or
+          SWU.softwareName Like 'Microsoft Office 365 Business - sv-se')) And
   tblAssets.AssetID In (Select ADC.AssetID
       From tblADComputers As ADC Inner Join tblADMembership As ADM On
           ADC.ADObjectID = ADM.ChildAdObjectID Inner Join tblADGroups As ADG On
