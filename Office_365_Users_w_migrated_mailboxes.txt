@@ -1,0 +1,11 @@
+Select Top 1000000 tblADusers.Lastname,
+  tblADusers.Firstname,
+  tblADusers.email,
+  tblADusers.Description,
+  web50repOffice365UserMailboxes.Organization As Organization1,
+  tblADusers.Userdomain
+From web50repOffice365UserMailboxes
+  Inner Join tblADusers On web50repOffice365UserMailboxes.UserPrincipalName =
+    tblADusers.UPN
+Order By tblADusers.Lastname,
+  tblADusers.Firstname
