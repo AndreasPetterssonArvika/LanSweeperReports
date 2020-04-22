@@ -1,5 +1,6 @@
 Select Top 1000000 tblAssets.AssetID,
   tblAssets.AssetName,
+  tblAssets.Domain,
   tsysAssetTypes.AssetTypename,
   tsysAssetTypes.AssetTypeIcon10 As icon,
   tblAssets.Lastseen,
@@ -16,5 +17,4 @@ Where tblAssets.AssetID In (Select Top 10000 SW.AssetID
           SW.softID = SWU.SoftID
       Where (SWU.softwareName Like 'Microsoft Office Professional Plus 2010' Or
           SWU.softwareName Like 'Microsoft Office Standard 2010')) And
-  tblAssetCustom.State = 1 And tblAssets.Domain = 'ARVIKA' And
-  tblADusers.Userdomain = 'ARVIKA'
+  tblAssetCustom.State = 1
